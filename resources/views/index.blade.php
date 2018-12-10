@@ -1,0 +1,18 @@
+@extends('layout')
+@section('title',$title)
+
+@section('content')
+    @include('sections.upperSearchPanel')
+    @include('sections.topLogoPanel')
+    @include('sections.topNavigationPanel')
+    @include('sections.introSection')
+    @include('sections.aboutSection')
+    @include('sections.servicesSection')
+    @include('sections.teamSection')
+    @include('sections.appointmentSection')
+    @include('sections.missionSection')
+    @include('sections.reviewsSection')
+    @include('sections.blogSection')
+    @include('sections.contactFormSection')
+    @include('sections.copyrightSection')
+@endsection
