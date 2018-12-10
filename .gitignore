@@ -1,4 +1,4 @@
 vendor
 .idea
-
+.env
 config/database.p hp
