@@ -8,11 +8,11 @@ use Monolog\Handler\StreamHandler;
 $builder = new ContainerBuilder();
 $container = $builder->newInstance();
 
-//$container->set('logger', function (){
-//$logger = new Logger('name');
-//$logger->pushHandler(new StreamHandler(__DIR__ . '/../resources/logs/main.logger'));
-//return $logger;
-//});
+$container->set('logger', function (){
+$logger = new Logger('name');
+$logger->pushHandler(new StreamHandler(__DIR__ . '/../resources/logs/main.logger'));
+return $logger;
+});
 
 //$container->set('logger', function (){
 //    // create a log channel
@@ -24,11 +24,11 @@ $container = $builder->newInstance();
 //    return $logger;
 //});
 
-$container->set('logger', function (){
-   $log = new \Wa72\SimpleLogger\FileLogger(__DIR__ . '/../resources/logs/main.log');
-   $logger = new \NtSchool\SimpleLoggerAdapter($log);
-   return $logger;
-});
+//$container->set('logger', function (){
+//   $log = new \Wa72\SimpleLogger\FileLogger(__DIR__ . '/../resources/logs/main.log');
+//   $logger = new \NtSchool\SimpleLoggerAdapter($log);
+//   return $logger;
+//});
 
 $container->set(\NtSchool\Action\HomeAction::class, function () use ($renderer,$container) {
     return new \NtSchool\Action\HomeAction($renderer ,$container->get('logger') );

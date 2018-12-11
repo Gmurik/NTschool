@@ -11,7 +11,7 @@ final class HomeAction
     protected $renderer;
     protected $logger;
 
-    public function __construct($view,AdapterInterface $logger)
+    public function __construct($view, $logger)
     {
         $this->renderer = $view;
         $this->logger = $logger;
