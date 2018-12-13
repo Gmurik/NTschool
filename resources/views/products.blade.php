@@ -11,5 +11,4 @@
     @include('sections.productsSection')
     @include('sections.contactFormSection')
     @include('sections.copyrightSection')
-
 @endsection

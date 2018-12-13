@@ -73,3 +73,6 @@ $container->set(\NtSchool\Action\FaqAction::class, function () use ($renderer){
 $container->set(\NtSchool\Action\NotFoundAction::class, function () use ($renderer){
     return new \NtSchool\Action\NotFoundAction($renderer);
 });
+$container->set(\NtSchool\Action\BlogPostsAction::class, function () use ($renderer){
+    return new \NtSchool\Action\BlogPostsAction($renderer);
+});
