@@ -114,47 +114,15 @@
                                 <ul>
 
                                     <li>
-                                        <a href="/blog">Right Sidebar</a>
+                                        <a href="/blog">Posts</a>
                                     </li>
                                     <li>
-                                        <a href="blog-left.html">Left Sidebar</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-full.html">No Sidebar</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-mosaic.html">Blog Grid</a>
+                                        <a href="blog-video">Video Posts</a>
                                     </li>
 
-                                    <li>
-                                        <a href="blog-single-right.html">Post</a>
-                                        <ul>
-                                            <li>
-                                                <a href="blog-single-right.html">Right Sidebar</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-single-left.html">Left Sidebar</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-single-full.html">No Sidebar</a>
-                                            </li>
-                                        </ul>
-                                    </li>
 
-                                    <li>
-                                        <a href="blog-single-video-right.html">Video Post</a>
-                                        <ul>
-                                            <li>
-                                                <a href="blog-single-video-right.html">Right Sidebar</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-single-video-left.html">Left Sidebar</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-single-video-full.html">No Sidebar</a>
-                                            </li>
-                                        </ul>
-                                    </li>
+
+
 
                                 </ul>
                             </li>

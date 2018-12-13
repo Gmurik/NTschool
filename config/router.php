@@ -18,3 +18,4 @@ $router->get('service','/single-service', \NtSchool\Action\SingleServicesAction:
 $router->get('faq','/faq', \NtSchool\Action\FaqAction::class);
 $router->get('404','/404', \NtSchool\Action\NotFoundAction::class);
 $router->get('blog','/blog', \NtSchool\Action\BlogPostsAction::class);
+$router->get('blog-video','/blog-video', \NtSchool\Action\VideoBlogPostsAction::class);

@@ -76,3 +76,6 @@ $container->set(\NtSchool\Action\NotFoundAction::class, function () use ($render
 $container->set(\NtSchool\Action\BlogPostsAction::class, function () use ($renderer){
     return new \NtSchool\Action\BlogPostsAction($renderer);
 });
+$container->set(\NtSchool\Action\VideoBlogPostsAction::class, function () use ($renderer){
+    return new \NtSchool\Action\VideoBlogPostsAction($renderer);
+});
