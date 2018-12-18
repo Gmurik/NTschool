@@ -2,8 +2,10 @@
 
 namespace NtSchool\Action;
 
-use NtSchool\AdapterInterface;
+
 use Psr\Http\Message\ServerRequestInterface;
+use Timur\Notifier\NotifierAdapterInterface;
+
 
 final class HomeAction
 {
@@ -11,7 +13,7 @@ final class HomeAction
     protected $renderer;
     protected $logger;
 
-    public function __construct($view,AdapterInterface $logger)
+    public function __construct($view,NotifierAdapterInterface $logger)
     {
         $this->renderer = $view;
         $this->logger = $logger;
@@ -19,7 +21,7 @@ final class HomeAction
 
     public function __invoke(ServerRequestInterface $request)
     {
-        $this->logger->warning('Foo');
+        $this->logger->warning('Hello World');
         return $this->renderer->make('index',[
             'title' => 'PetShop HomePage'
         ]);

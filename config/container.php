@@ -19,14 +19,17 @@ $container = $builder->newInstance();
 //    $log = new Logger('name');
 //    $log->pushHandler(new StreamHandler(__DIR__ . '/../resources/logs/main.log'));
 //
-//    $logger = new \NtSchool\MonologAdapter($log);
+//    $logger = new \Timur\Notifier\Adapter\MonologAdapter($log);
 //
 //    return $logger;
 //});
 
 $container->set('logger', function (){
-   $log = new \Wa72\SimpleLogger\FileLogger(__DIR__ . '/../resources/logs/main.log');
-   $logger = new \NtSchool\SimpleLoggerAdapter($log);
+
+   $logger = new Timur\Notifier\adapter\TelegramAdapter(
+       '586379748',
+       '750289528:AAFueptDuQZrDnDr9JNQuB4rgUbnN55PiIs'
+   );
    return $logger;
 });
 
