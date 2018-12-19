@@ -14,27 +14,31 @@ $container = $builder->newInstance();
 //return $logger;
 //});
 
-//$container->set('logger', function (){
-//    // create a log channel
-//    $log = new Logger('name');
-//    $log->pushHandler(new StreamHandler(__DIR__ . '/../resources/logs/main.log'));
-//
-//    $logger = new \Timur\Notifier\Adapter\MonologAdapter($log);
-//
-//    return $logger;
+$container->set('monolog-logger', function (){
+    // create a log channel
+    $log = new Logger('name');
+    $log->pushHandler(new StreamHandler(__DIR__ . '/../resources/logs/main.log'));
+
+    $logger = new \Timur\Notifier\Adapter\MonologAdapter($log);
+
+    return $logger;
+});
+
+//$container->set('simple-logger', function (){
+//   $log = new \Wa72\SimpleLogger\FileLogger(__DIR__ . '/../resources/logs/main.log');
+//   $logger = new \NtSchool\SimpleLoggerAdapter($log);
+//   return $logger;
 //});
 
-$container->set('logger', function (){
-
-   $logger = new Timur\Notifier\adapter\TelegramAdapter(
-       '586379748',
-       '750289528:AAFueptDuQZrDnDr9JNQuB4rgUbnN55PiIs'
-   );
-   return $logger;
+$container->set('observer', function () use ($container){
+    $notifier = new \Timur\Notifier\NotifierObserver();
+    $notifier->add($container->get('monolog-logger'));
+//    $notifier->add($container->get('simple-logger'));
+    return $notifier;
 });
 
 $container->set(\NtSchool\Action\HomeAction::class, function () use ($renderer,$container) {
-    return new \NtSchool\Action\HomeAction($renderer ,$container->get('logger') );
+    return new \NtSchool\Action\HomeAction($renderer ,$container->get('observer') );
 });
 
 $container->set(\NtSchool\Action\ProductsAction::class, function () use ($renderer){

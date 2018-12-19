@@ -1495,16 +1495,16 @@
         },
         {
             "name": "timur/notifier",
-            "version": "v1.2.1",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Gmurik/Notifire.git",
-                "reference": "da46d77eb24925d5535a5e47474106b14b3cd03c"
+                "reference": "416d9e3c4a884c717197c0d6abd57fd3cdb5f3ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Gmurik/Notifire/zipball/da46d77eb24925d5535a5e47474106b14b3cd03c",
-                "reference": "da46d77eb24925d5535a5e47474106b14b3cd03c",
+                "url": "https://api.github.com/repos/Gmurik/Notifire/zipball/416d9e3c4a884c717197c0d6abd57fd3cdb5f3ae",
+                "reference": "416d9e3c4a884c717197c0d6abd57fd3cdb5f3ae",
                 "shasum": ""
             },
             "require": {
@@ -1524,7 +1524,7 @@
                 }
             ],
             "description": "notifier",
-            "time": "2018-12-18T07:36:50+00:00"
+            "time": "2018-12-18T10:40:46+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
