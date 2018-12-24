@@ -61,7 +61,7 @@ class tmhUtilities {
     // prepare the entities
     foreach ($tweet['entities'] as $type => $things) {
       foreach ($things as $entity => $value) {
-        $tweet_link = "<a href=\"https://twitter.com/{$tweet['user']['screen_name']}/statuses/{$tweet['id']}\"{$target}>{$tweet['created_at']}</a>";
+        $tweet_link = "<a href=\"https://twitter.com/{$tweet['User']['screen_name']}/statuses/{$tweet['id']}\"{$target}>{$tweet['created_at']}</a>";
 
         switch ($type) {
           case 'hashtags':
@@ -209,10 +209,10 @@ class tmhUtilities {
   }
 
   /**
-   * Asks the user for input and returns the line they enter
+   * Asks the User for input and returns the line they enter
    *
-   * @param string $prompt the text to display to the user
-   * @return the text entered by the user
+   * @param string $prompt the text to display to the User
+   * @return the text entered by the User
    */
   public static function read_input($prompt) {
     echo $prompt;
