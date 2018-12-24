@@ -3,8 +3,9 @@
 namespace NtSchool\Action;
 
 use Psr\Http\Message\ServerRequestInterface;
-use Timur\Notifier\NotifierAdapterInterface;
-use Timur\Notifier\ObserverAdapterInterface;
+use Illuminate\Validation\Factory;
+use Illuminate\Validation\ValidationException;
+use NtSchool\Model\User;
 
 final class AdminSignUpAction
 {
@@ -36,8 +37,12 @@ final class AdminSignUpAction
                     ]
                 );
 
+                $user = new User();
+                $user->email = $data['email'];
+                $user->password = password_hash($data['password'], PASSWORD_ARGON2I);
+                $user->save();
+                header('Location: /sign-in');
 
-                header('Location: /');
             } catch (ValidationException $e) {
                 $messages = $e->validator->errors();
             }

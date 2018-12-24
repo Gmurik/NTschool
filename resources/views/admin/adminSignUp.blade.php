@@ -20,23 +20,18 @@
                                 </h4>
                                 <hr class="bottommargin_30">
                                 <div class="wrap-forms">
-                                    <form>
+                                    <form method="post">
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group has-placeholder">
-                                                    <label for="login-name">Your Name</label>
-                                                    <i class="grey fa fa-user"></i>
-                                                    <input type="text" class="form-control" id="login-name" placeholder="Name">
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="form-group has-placeholder">
-                                                    <label for="login-email">Email address</label>
+                                                    <label for="email">Email address</label>
+                                                    @if($messages !== null && $messages->has('email'))
+                                                        @foreach($messages->get('email') as $message)
+                                                            <p style="color:red">{{$message}}</p>
+                                                        @endforeach
+                                                    @endif
                                                     <i class="grey fa fa-envelope-o"></i>
-                                                    <input type="email" class="form-control" id="login-email" placeholder="Email Address">
+                                                    <input type="email" class="form-control" id="email" placeholder="Email Address" name="email">
                                                 </div>
 
                                             </div>
@@ -44,18 +39,28 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group has-placeholder">
-                                                    <label for="login-password">Password</label>
+                                                    <label for="password">Password</label>
+                                                    @if($messages !== null && $messages->has('password'))
+                                                        @foreach($messages->get('password') as $message)
+                                                            <p style="color:red">{{$message}}</p>
+                                                        @endforeach
+                                                    @endif
                                                     <i class="grey fa fa-pencil-square-o"></i>
-                                                    <input type="password" class="form-control" id="login-password" placeholder="Password">
+                                                    <input type="password" class="form-control" id="password" placeholder="Password" name="password">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group has-placeholder">
-                                                    <label for="login-password2">Retype Password</label>
+                                                    <label for="password_confirmation">Retype Password</label>
+                                                    @if($messages !== null && $messages->has('password_confirmation'))
+                                                        @foreach($messages->get('password_confirmation') as $message)
+                                                            <p style="color:red">{{$message}}</p>
+                                                        @endforeach
+                                                    @endif
                                                     <i class="grey fa fa-pencil-square-o"></i>
-                                                    <input type="password" class="form-control" id="login-password2" placeholder="Retype Password">
+                                                    <input type="password" class="form-control" id="password_confirmation" placeholder="Retype Password" name="password_confirmation">
                                                 </div>
                                             </div>
                                         </div>
