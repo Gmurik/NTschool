@@ -73,6 +73,12 @@ $container->set(\NtSchool\Action\CheckoutAction::class, function () use ($render
 $container->set(\NtSchool\Action\RegistrationAction::class, function () use ($renderer,$container){
     return new \NtSchool\Action\RegistrationAction($renderer,$container->get('validator'));
 });
+$container->set(\NtSchool\Action\AdminSignInAction::class, function () use ($renderer,$container){
+    return new \NtSchool\Action\AdminSignInAction($renderer,$container->get('validator'));
+});
+$container->set(\NtSchool\Action\AdminSignUpAction::class, function () use ($renderer,$container){
+    return new \NtSchool\Action\AdminSignUpAction($renderer,$container->get('validator'));
+});
 $container->set(\NtSchool\Action\ScheduleAction::class, function () use ($renderer){
     return new \NtSchool\Action\ScheduleAction($renderer);
 });
