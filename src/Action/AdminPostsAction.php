@@ -2,16 +2,12 @@
 
 namespace NtSchool\Action;
 
-use Illuminate\Support\MessageBag;
-use NtSchool\Model\User;
 use Psr\Http\Message\ServerRequestInterface;
 use Illuminate\Validation\Factory;
 use Illuminate\Validation\ValidationException;
-
-
-
-
-final class AdminSignInAction
+use NtSchool\Model\User;
+use NtSchool\Action\AdminAuthTrait;
+final class AdminPostsAction
 {
     protected $renderer;
     /** @var Factory */
@@ -25,39 +21,38 @@ final class AdminSignInAction
 
     public function __invoke(ServerRequestInterface $request)
     {
-        $messages = new MessageBag();
+        AdminAuthTrait::checkAuth();
+        $messages = null;
         $data = [];
-        $passwordHash = null;
 
         if ($request->getMethod() == 'POST') {
             $data = $request->getParsedBody();
-            $userData = User::where('email',$data['email'])->first();
-            if ($data['email']=== $userData['email']){
-                $passwordHash = $userData['password'];
-            }
 
             try {
                 $this->validator->validate(
                     $data,
                     [
-                        'email' => ['required', 'email', 'exists:users,email'],
-                        'password' => ['required', 'min:8']
+                        'email' => ['required', 'email', 'unique:users,email'],
+                        'password' => ['required', 'min:8', 'confirmed'],
+                        'password_confirmation' => ['required', 'min:8'],
                     ]
                 );
-                if(!password_verify($data['password'],$passwordHash)){
-                    $messages->add('email','Введен не верный пароль');
-                }
-                $_SESSION['user'] = $data;
-                header('Location: /admin-posts');
+
+                $user = new User();
+                $user->email = $data['email'];
+                $user->password = password_hash($data['password'], PASSWORD_ARGON2I);
+                $user->save();
+                header('Location: /sign-in');
+
             } catch (ValidationException $e) {
                 $messages = $e->validator->errors();
             }
         }
 
 //
-        return $this->renderer->make('admin.adminSignIn', array_merge([
+        return $this->renderer->make('admin.adminPosts', array_merge([
             'messages' => $messages,
-            'title' => 'PetShop Registration',
+            'title' => 'Admin Posts',
         ]), $data);
     }
 }

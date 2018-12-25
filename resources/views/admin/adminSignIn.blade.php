@@ -20,13 +20,18 @@
                                 </h4>
                                 <hr class="bottommargin_30">
                                 <div class="wrap-forms">
-                                    <form>
+                                    <form method="post">
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group has-placeholder">
-                                                    <label for="login-email">Email address</label>
+                                                    <label for="email">Email address</label>
+                                                    @if($messages !== null && $messages->has('email'))
+                                                        @foreach($messages->get('email') as $message)
+                                                            <p style="color:red">{{$message}}</p>
+                                                        @endforeach
+                                                    @endif
                                                     <i class="grey fa fa-envelope-o"></i>
-                                                    <input type="email" class="form-control" id="login-email" placeholder="Email Address">
+                                                    <input type="email" class="form-control" id="email" placeholder="Email Address" name="email">
                                                 </div>
 
                                             </div>
@@ -34,19 +39,24 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group has-placeholder">
-                                                    <label for="login-password">Password</label>
+                                                    <label for="password">Password</label>
+                                                    @if($messages !== null && $messages->has('password'))
+                                                        @foreach($messages->get('password') as $message)
+                                                            <p style="color:red">{{$message}}</p>
+                                                        @endforeach
+                                                    @endif
                                                     <i class="grey fa fa-pencil-square-o"></i>
-                                                    <input type="password" class="form-control" id="login-password" placeholder="Password">
+                                                    <input type="password" class="form-control" id="password" placeholder="Password" name="password">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" id="remember_me_checkbox">
-                                                    <label for="remember_me_checkbox">Rememrber Me
-                                                    </label>
-                                                </div>
+                                                {{--<div class="checkbox">--}}
+                                                    {{--<input type="checkbox" id="remember_me_checkbox">--}}
+                                                    {{--<label for="remember_me_checkbox">Rememrber Me--}}
+                                                    {{--</label>--}}
+                                                {{--</div>--}}
                                             </div>
                                         </div>
                                         <button type="submit" class="theme_button block_button color1">Log In</button>

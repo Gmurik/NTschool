@@ -15,7 +15,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="/sign-in">Admin Dashboard</a>
+                                        <a href="/admin-posts">Admin Dashboard</a>
                                     </li>
                                 </ul>
                             </li>
