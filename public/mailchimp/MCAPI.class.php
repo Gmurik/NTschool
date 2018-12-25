@@ -21,12 +21,12 @@ class MCAPI {
     var $chunkSize = 8192;
     
     /**
-     * Cache the user api_key so we only have to log in once per client instantiation
+     * Cache the User api_key so we only have to log in once per client instantiation
      */
     var $api_key;
 
     /**
-     * Cache the user api_key so we only have to log in once per client instantiation
+     * Cache the User api_key so we only have to log in once per client instantiation
      */
     var $secure = false;
     
@@ -313,7 +313,7 @@ class MCAPI {
             string from_email the From: email address for your campaign message
             string from_name the From: name for your campaign message (not an email address)
             string to_name the To: name recipients will see (not email address)
-            int template_id optional - use this user-created template to generate the HTML content of the campaign (takes precendence over other template options)
+            int template_id optional - use this User-created template to generate the HTML content of the campaign (takes precendence over other template options)
             int gallery_template_id optional - use a template from the public gallery to generate the HTML content of the campaign (takes precendence over base template options)
             int base_template_id optional - use this a base/start-from-scratch template to generate the HTML content of the campaign
             int folder_id optional - automatically file the new campaign in the folder_id passed. Get using folders() - note that Campaigns and Autoresponders have separate folder setupsn 
@@ -1009,7 +1009,7 @@ class MCAPI {
      * @param array  $opts optional various parameters which can be used to configure the shared report
             string to_email optional - optional, comma delimited list of email addresses to share the report with - no value means an email will not be sent
             string company optional - a company name to be displayed (use of a theme may hide this) - max 255 bytes
-            int theme_id optional - either a global or a user-specific theme id. Currently this needs to be pulled out of either the Share Report or Cobranding web views by grabbing the "theme" attribute from the list presented.
+            int theme_id optional - either a global or a User-specific theme id. Currently this needs to be pulled out of either the Share Report or Cobranding web views by grabbing the "theme" attribute from the list presented.
             string  css_url    optional - a link to an external CSS file to be included after our default CSS (http://vip-reports.net/css/vip.css) <strong>only if</strong> loaded via the "secure_url" - max 255 bytes
      * @return array Array containing details for the shared report
                 string title The Title of the Campaign being shared
@@ -1148,7 +1148,7 @@ class MCAPI {
 
     /**
      * Given a campaign and correct paging limits, return the entire click and open history with timestamps, ordered by time, 
-     * for every user a campaign was delivered to.
+     * for every User a campaign was delivered to.
      *
      * @section Campaign Report Data
      * @example mcapi_campaignEmailStatsAIMAll.php
@@ -1206,7 +1206,7 @@ class MCAPI {
     }
 
     /**
-     * Retrieve all of the lists defined for your user account
+     * Retrieve all of the lists defined for your User account
      *
      * @section List Related
      * @example mcapi_lists.php
@@ -1306,7 +1306,7 @@ class MCAPI {
      *
      * @param string $id the list id to connect to. Get by calling lists()
      * @param string $tag The merge tag to add, e.g. FNAME. 10 bytes max, valid characters: "A-Z 0-9 _" no spaces, dashes, etc.
-     * @param string $name The long description of the tag being added, used for user displays
+     * @param string $name The long description of the tag being added, used for User displays
      * @param array $options optional Various options for this merge var. <em>note:</em> for historical purposes this can also take a "boolean"
                     string field_type optional one of: text, number, radio, dropdown, date, address, phone, url, imageurl, zip, birthday - defaults to text
                     boolean req optional indicates whether the field is required - defaults to false
@@ -1530,7 +1530,7 @@ class MCAPI {
                     bool upemail triggered when a subscriber's email address is changed
                     bool campaign triggered when a campaign is sent or canceled
                 array sources the possible sources and whether they are enabled
-                    bool user whether user/subscriber triggered actions are returned
+                    bool User whether User/subscriber triggered actions are returned
                     bool admin whether admin (manual, in-app) triggered actions are returned
                     bool api  whether api triggered actions are returned
      */
@@ -1554,7 +1554,7 @@ class MCAPI {
             bool upemail optional when  subscribers change their email address, defaults to true
             bool campaign option when a campaign is sent or canceled, defaults to true
      * @param array $sources optional a hash of sources to fire this Webhook for
-            bool user optional user/subscriber initiated actions, defaults to true
+            bool User optional User/subscriber initiated actions, defaults to true
             bool admin optional admin actions in our web app, defaults to true
             bool api optional actions that happen via API calls, defaults to false
      * @return bool true if the call succeeds, otherwise an exception will be thrown
@@ -1923,7 +1923,7 @@ class MCAPI {
                     string ip_opt IP Address this address opted in from.
                     string timestamp_opt The date/time the optin completed
                     int member_rating the rating of the subscriber. This will be 1 - 5 as described <a href="http://eepurl.com/f-2P" target="_blank">here</a>
-                    string campaign_id If the user is unsubscribed and they unsubscribed from a specific campaign, that campaign_id will be listed, otherwise this is not returned.
+                    string campaign_id If the User is unsubscribed and they unsubscribed from a specific campaign, that campaign_id will be listed, otherwise this is not returned.
                     array lists An associative array of the other lists this member belongs to - the key is the list id and the value is their status in that list.
                     string timestamp The date/time this email address entered it's current status
                     string info_changed The last time this record was changed. If the record is old enough, this may be blank.
@@ -1951,7 +1951,7 @@ class MCAPI {
                         string note the text entered
                         string created the date the note was created
                         string updated the date the note was last updated
-                        string created_by_name the name of the user who created the note. This can change as users update their profile.
+                        string created_by_name the name of the User who created the note. This can change as users update their profile.
      */
     function listMemberInfo($id, $email_address) {
         $params = array();
@@ -2078,20 +2078,20 @@ class MCAPI {
     }
 
     /**
-     * Retrieve the clients that the list's subscribers have been tagged as being used based on user agents seen. Made possible by <a href="http://user-agent-string.info" target="_blank">user-agent-string.info</a>
+     * Retrieve the clients that the list's subscribers have been tagged as being used based on User agents seen. Made possible by <a href="http://User-agent-string.info" target="_blank">User-agent-string.info</a>
      *
      * @section List Related
      *
      * @param string $id the list id to connect to. Get by calling lists()
-     * @return array the desktop and mobile user agents in use on the list
-                array desktop desktop user agents and percentages
+     * @return array the desktop and mobile User agents in use on the list
+                array desktop desktop User agents and percentages
                     double penetration the percent of desktop clients in use
                     array clients a record for each containing:
                         string client the common name for the client
                         string icon a url to an image representing this client
                         string percent percent of list using the client
                         string members total members using the client
-                array mobile mobile user agents and percentages
+                array mobile mobile User agents and percentages
                     double penetration the percent of mobile clients in use
                     array clients a record for each containing:
                         string client the common name for the client
@@ -2113,12 +2113,12 @@ class MCAPI {
      * @example xml-rpc_templates.php
      *
      * @param array $types optional the types of templates to return
-                        boolean user    Custom templates for this user account. Defaults to true.
+                        boolean User    Custom templates for this User account. Defaults to true.
                         boolean gallery Templates from our Gallery. Note that some templates that require extra configuration are withheld. (eg, the Etsy template). Defaults to false.
                         boolean base    Our "start from scratch" extremely basic templates. Defaults to false.
      * @param string $category optional for Gallery templates only, limit to a specific template category
      * @param array $inactives optional options to control how inactive templates are returned, if at all
-                        boolean include user templates are not deleted, only set inactive. defaults to false.
+                        boolean include User templates are not deleted, only set inactive. defaults to false.
                         boolean only    only include inactive templates. defaults to false.
      * @return array An array of arrays, one for each template
                 int id Id of the template
@@ -2144,14 +2144,14 @@ class MCAPI {
      * @section Template  Related
      *
      * @param int $tid the template id - get from templates()
-     * @param string $type optional the template type to load - one of 'user', 'gallery', 'base', defaults to user.
+     * @param string $type optional the template type to load - one of 'User', 'gallery', 'base', defaults to User.
      * @return array an array of info to be used when editing
                 array default_content the default content broken down into the named editable sections for the template - dependant upon template, so not documented
                 array sections the valid editable section names - dependant upon template, so not documented
                 string source the full source of the template as if you exported it via our template editor
                 string preview similar to the source, but the rendered version of the source from our popup preview
      */
-    function templateInfo($tid, $type='user') {
+    function templateInfo($tid, $type='User') {
         $params = array();
         $params["tid"] = $tid;
         $params["type"] = $type;
@@ -2159,7 +2159,7 @@ class MCAPI {
     }
 
     /**
-     * Create a new user template, <strong>NOT</strong> campaign content. These templates can then be applied while creating campaigns.
+     * Create a new User template, <strong>NOT</strong> campaign content. These templates can then be applied while creating campaigns.
      *
      * @section Template  Related
      * @example mcapi_create_template.php
@@ -2177,11 +2177,11 @@ class MCAPI {
     }
 
     /**
-     * Replace the content of a user template, <strong>NOT</strong> campaign content.
+     * Replace the content of a User template, <strong>NOT</strong> campaign content.
      *
      * @section Template  Related
      *
-     * @param int $id the id of the user template to update
+     * @param int $id the id of the User template to update
      * @param array  $values the values to updates - while both are optional, at least one should be provided. Both can be updated at the same time.
             string name optional the name for the template - names must be unique and a max of 50 bytes
             string html optional a string specifying the entire template to be created. This is <strong>NOT</strong> campaign content. They are intended to utilize our <a href="http://www.mailchimp.com/resources/email-template-language/" target="_blank">template language</a>.
@@ -2196,11 +2196,11 @@ class MCAPI {
     }
 
     /**
-     * Delete (deactivate) a user template
+     * Delete (deactivate) a User template
      *
      * @section Template  Related
      *
-     * @param int $id the id of the user template to delete
+     * @param int $id the id of the User template to delete
      * @return boolean true if the template was deleted, otherwise an error will be thrown
      */
     function templateDel($id) {
@@ -2210,11 +2210,11 @@ class MCAPI {
     }
 
     /**
-     * Undelete (reactivate) a user template
+     * Undelete (reactivate) a User template
      *
      * @section Template  Related
      *
-     * @param int $id the id of the user template to reactivate
+     * @param int $id the id of the User template to reactivate
      * @return boolean true if the template was deleted, otherwise an error will be thrown
      */
     function templateUndel($id) {
@@ -2232,7 +2232,7 @@ class MCAPI {
      * @param array $exclude optional defaults to nothing for backwards compatibility. Allows controlling which extra arrays are returned since they can slow down calls. Valid keys are "modules", "orders", "rewards-credits", "rewards-inspections", "rewards-referrals", and "rewards-applied". Hint: "rewards-referrals" is typically the culprit. To avoid confusion, if data is excluded, the corresponding key <strong>will not be returned at all</strong>.   
      * @return array containing the details for the account tied to this API Key
                 string username The Account username
-                string user_id The Account user unique id (for building some links)
+                string user_id The Account User unique id (for building some links)
                 bool is_trial Whether the Account is in Trial mode (can only send campaigns to less than 100 emails)
                 bool is_approved Whether the Account has been approved for purchases
                 bool has_activated Whether the Account has been activated
@@ -2275,7 +2275,7 @@ class MCAPI {
                     double credits_used The total credits used
                 array rewards Rewards details for the account including credits & inspections earned, number of referals, referal details, and rewards used
                     int referrals_this_month the total number of referrals this month
-                    string notify_on whether or not we notify the user when rewards are earned
+                    string notify_on whether or not we notify the User when rewards are earned
                     string notify_email the email address address used for rewards notifications
                     array credits Email credits earned:
                         int this_month credits earned this month
@@ -2291,7 +2291,7 @@ class MCAPI {
                         string signup_date the signup date for the account
                         string type the source for the referral
                     array applied Applied rewards, including:
-                        int value the number of credits user
+                        int value the number of credits User
                         string date the date appplied
                         int order_id the order number credits were applied to
                         string order_desc the order description
@@ -2353,7 +2353,7 @@ class MCAPI {
     }
 
     /**
-     * List all the folders for a user account
+     * List all the folders for a User account
      *
      * @section Folder  Related
      * @example mcapi_folders.php
@@ -2617,7 +2617,7 @@ class MCAPI {
      * @example xml-rpc_apikeyAdd.php
      * @example mcapi_apikeyAdd.php
      * 
-     * @param string $username Your MailChimp user name
+     * @param string $username Your MailChimp User name
      * @param string $password Your MailChimp password
      * @param boolean $expired optional - whether or not to include expired keys, defaults to false
      * @return array an array of API keys including:
@@ -2639,7 +2639,7 @@ class MCAPI {
      * @section Security Related
      * @example xml-rpc_apikeyAdd.php
      *
-     * @param string $username Your MailChimp user name
+     * @param string $username Your MailChimp User name
      * @param string $password Your MailChimp password
      * @return string a new API Key that can be immediately used.
      */
@@ -2660,7 +2660,7 @@ class MCAPI {
      * @example mcapi_apikeyExpire.php
      * @example xml-rpc_apikeyExpire.php
      *
-     * @param string $username Your MailChimp user name
+     * @param string $username Your MailChimp User name
      * @param string $password Your MailChimp password
      * @return boolean true if it worked, otherwise an error is thrown.
      */

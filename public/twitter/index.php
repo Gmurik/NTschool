@@ -163,7 +163,7 @@ class ezTweet {
 	}
 
 	private function pathify(&$path) {
-		// Ensures our user-specified paths are up to snuff
+		// Ensures our User-specified paths are up to snuff
 		$path = realpath($path).'/';
 	}
 

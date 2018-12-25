@@ -8,30 +8,51 @@ use Monolog\Handler\StreamHandler;
 $builder = new ContainerBuilder();
 $container = $builder->newInstance();
 
+$container->set('validator', function () use ($capsule) {
+    $filesystem = new Illuminate\Filesystem\Filesystem();
+    $loader = new Illuminate\Translation\FileLoader($filesystem, dirname(dirname(__FILE__)) . '/resources/lang');
+    $loader->addNamespace('lang', dirname(dirname(__FILE__)) . '/resources/lang');
+    $loader->load($lang = 'ru', $group = 'validation', $namespace = 'lang');
+
+    $factory = new Illuminate\Translation\Translator($loader, 'ru');
+    $validator = new Illuminate\Validation\Factory($factory);
+
+    $databasePresenceVerifier = new \Illuminate\Validation\DatabasePresenceVerifier($capsule->getDatabaseManager());
+    $validator->setPresenceVerifier($databasePresenceVerifier);
+
+    return $validator;
+});
 //$container->set('logger', function (){
 //$logger = new Logger('name');
 //$logger->pushHandler(new StreamHandler(__DIR__ . '/../resources/logs/main.logger'));
 //return $logger;
 //});
 
-//$container->set('logger', function (){
-//    // create a log channel
-//    $log = new Logger('name');
-//    $log->pushHandler(new StreamHandler(__DIR__ . '/../resources/logs/main.log'));
-//
-//    $logger = new \NtSchool\MonologAdapter($log);
-//
-//    return $logger;
+$container->set('monolog-logger', function (){
+    // create a log channel
+    $log = new Logger('name');
+    $log->pushHandler(new StreamHandler(__DIR__ . '/../resources/logs/main.log'));
+
+    $logger = new \Timur\Notifier\Adapter\MonologAdapter($log);
+
+    return $logger;
+});
+
+//$container->set('simple-logger', function (){
+//   $log = new \Wa72\SimpleLogger\FileLogger(__DIR__ . '/../resources/logs/main.log');
+//   $logger = new \NtSchool\SimpleLoggerAdapter($log);
+//   return $logger;
 //});
 
-$container->set('logger', function (){
-   $log = new \Wa72\SimpleLogger\FileLogger(__DIR__ . '/../resources/logs/main.log');
-   $logger = new \NtSchool\SimpleLoggerAdapter($log);
-   return $logger;
+$container->set('observer', function () use ($container){
+    $notifier = new \Timur\Notifier\NotifierObserver();
+    $notifier->add($container->get('monolog-logger'));
+//    $notifier->add($container->get('simple-logger'));
+    return $notifier;
 });
 
 $container->set(\NtSchool\Action\HomeAction::class, function () use ($renderer,$container) {
-    return new \NtSchool\Action\HomeAction($renderer ,$container->get('logger') );
+    return new \NtSchool\Action\HomeAction($renderer ,$container->get('observer') );
 });
 
 $container->set(\NtSchool\Action\ProductsAction::class, function () use ($renderer){
@@ -49,8 +70,17 @@ $container->set(\NtSchool\Action\ContactsAction::class, function () use ($render
 $container->set(\NtSchool\Action\CheckoutAction::class, function () use ($renderer){
     return new \NtSchool\Action\CheckoutAction($renderer);
 });
-$container->set(\NtSchool\Action\RegistrationAction::class, function () use ($renderer){
-    return new \NtSchool\Action\RegistrationAction($renderer);
+$container->set(\NtSchool\Action\RegistrationAction::class, function () use ($renderer,$container){
+    return new \NtSchool\Action\RegistrationAction($renderer,$container->get('validator'));
+});
+$container->set(\NtSchool\Action\AdminSignInAction::class, function () use ($renderer,$container){
+    return new \NtSchool\Action\AdminSignInAction($renderer,$container->get('validator'));
+});
+$container->set(\NtSchool\Action\AdminSignUpAction::class, function () use ($renderer,$container){
+    return new \NtSchool\Action\AdminSignUpAction($renderer,$container->get('validator'));
+});
+$container->set(\NtSchool\Action\AdminPostsAction::class, function () use ($renderer,$container){
+    return new \NtSchool\Action\AdminPostsAction($renderer,$container->get('validator'));
 });
 $container->set(\NtSchool\Action\ScheduleAction::class, function () use ($renderer){
     return new \NtSchool\Action\ScheduleAction($renderer);

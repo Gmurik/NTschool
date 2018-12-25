@@ -514,7 +514,7 @@
                                         <div class="col-md-6">
                                             <p class="comment-form-author">
                                                 <label for="author">Name <span class="required">*</span></label>
-                                                <!-- <i class="rt-icon2-user-outline"></i> -->
+                                                <!-- <i class="rt-icon2-User-outline"></i> -->
                                                 <input type="text" aria-required="true" size="30" value="" name="author" id="author" class="form-control" placeholder="Full Name">
                                             </p>
                                         </div>

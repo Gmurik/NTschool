@@ -1,15 +1,13 @@
 <?php
 
-
 namespace NtSchool\Action;
 
-
+use Psr\Http\Message\ServerRequestInterface;
 use Illuminate\Validation\Factory;
 use Illuminate\Validation\ValidationException;
 use NtSchool\Model\User;
-use Psr\Http\Message\ServerRequestInterface;
 
-class RegistrationAction
+final class AdminSignUpAction
 {
     protected $renderer;
     /** @var Factory */
@@ -43,14 +41,15 @@ class RegistrationAction
                 $user->email = $data['email'];
                 $user->password = password_hash($data['password'], PASSWORD_ARGON2I);
                 $user->save();
-                header('Location: /');
+                header('Location: /sign-in');
+
             } catch (ValidationException $e) {
                 $messages = $e->validator->errors();
             }
         }
 
 //
-        return $this->renderer->make('registration', array_merge([
+        return $this->renderer->make('admin.adminSignUp', array_merge([
             'messages' => $messages,
             'title' => 'PetShop Registration',
             'pageName' => 'Registration',
