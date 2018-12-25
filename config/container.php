@@ -8,6 +8,20 @@ use Monolog\Handler\StreamHandler;
 $builder = new ContainerBuilder();
 $container = $builder->newInstance();
 
+$container->set('validator', function () use ($capsule) {
+    $filesystem = new Illuminate\Filesystem\Filesystem();
+    $loader = new Illuminate\Translation\FileLoader($filesystem, dirname(dirname(__FILE__)) . '/resources/lang');
+    $loader->addNamespace('lang', dirname(dirname(__FILE__)) . '/resources/lang');
+    $loader->load($lang = 'ru', $group = 'validation', $namespace = 'lang');
+
+    $factory = new Illuminate\Translation\Translator($loader, 'ru');
+    $validator = new Illuminate\Validation\Factory($factory);
+
+    $databasePresenceVerifier = new \Illuminate\Validation\DatabasePresenceVerifier($capsule->getDatabaseManager());
+    $validator->setPresenceVerifier($databasePresenceVerifier);
+
+    return $validator;
+});
 //$container->set('logger', function (){
 //$logger = new Logger('name');
 //$logger->pushHandler(new StreamHandler(__DIR__ . '/../resources/logs/main.logger'));
@@ -56,8 +70,17 @@ $container->set(\NtSchool\Action\ContactsAction::class, function () use ($render
 $container->set(\NtSchool\Action\CheckoutAction::class, function () use ($renderer){
     return new \NtSchool\Action\CheckoutAction($renderer);
 });
-$container->set(\NtSchool\Action\RegistrationAction::class, function () use ($renderer){
-    return new \NtSchool\Action\RegistrationAction($renderer);
+$container->set(\NtSchool\Action\RegistrationAction::class, function () use ($renderer,$container){
+    return new \NtSchool\Action\RegistrationAction($renderer,$container->get('validator'));
+});
+$container->set(\NtSchool\Action\AdminSignInAction::class, function () use ($renderer,$container){
+    return new \NtSchool\Action\AdminSignInAction($renderer,$container->get('validator'));
+});
+$container->set(\NtSchool\Action\AdminSignUpAction::class, function () use ($renderer,$container){
+    return new \NtSchool\Action\AdminSignUpAction($renderer,$container->get('validator'));
+});
+$container->set(\NtSchool\Action\AdminPostsAction::class, function () use ($renderer,$container){
+    return new \NtSchool\Action\AdminPostsAction($renderer,$container->get('validator'));
 });
 $container->set(\NtSchool\Action\ScheduleAction::class, function () use ($renderer){
     return new \NtSchool\Action\ScheduleAction($renderer);

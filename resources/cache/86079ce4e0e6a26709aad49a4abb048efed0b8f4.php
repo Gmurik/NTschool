@@ -8,7 +8,7 @@
 <!--<![endif]-->
 
 <head>
-    <title>@yield('title')</title>
+    <title><?php echo $__env->yieldContent('title'); ?></title>
     <meta charset="utf-8">
     <!--[if IE]>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -310,14 +310,14 @@
             </div>
         </header>
 
-        @yield('topContentNav')
-        @yield('video')
+        <?php echo $__env->yieldContent('topContentNav'); ?>
+        <?php echo $__env->yieldContent('video'); ?>
         <section class="ls section_padding_top_100 section_padding_bottom_100 columns_padding_25">
             <div class="container">
                 <div class="row">
 
                     <div class="col-sm-7 col-md-8 col-lg-8">
-                    @yield('content')
+                    <?php echo $__env->yieldContent('content'); ?>
                     </div>
                     <!--eof .col-sm-8 (main content)-->
 

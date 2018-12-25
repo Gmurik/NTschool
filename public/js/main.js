@@ -536,7 +536,7 @@ function windowLoadInit() {
 	jQuery('.signup').on('submit', function( e ) {
 		e.preventDefault();
 		var $form = jQuery(this);
-		// update user interface
+		// update User interface
 		$form.find('.response').html('Adding email address...');
 		// Prepare query string and send AJAX request
 		jQuery.ajax({
@@ -557,7 +557,7 @@ function windowLoadInit() {
 			loading_text: 'loading twitter feed...',
 			join_text: 'auto',
 			username: 'michaeljackson', 
-			template: "<span class=\"darklinks\">{user}</span><span class=\"tweet_text\">{tweet_text}</span><span class=\"highlightlinks\">{time}</span>"
+			template: "<span class=\"darklinks\">{User}</span><span class=\"tweet_text\">{tweet_text}</span><span class=\"highlightlinks\">{time}</span>"
 		});
 	}
 

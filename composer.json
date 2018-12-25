@@ -17,7 +17,8 @@
         "vlucas/phpdotenv": "^2.5",
         "monolog/monolog": "^1.24",
         "wa72/simplelogger": "^1.1",
-        "timur/notifier": "^1.2"
+        "timur/notifier": "^1.2",
+        "illuminate/translation": "^5.7"
 
     }
 }

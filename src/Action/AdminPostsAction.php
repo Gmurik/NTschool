@@ -1,15 +1,13 @@
 <?php
 
-
 namespace NtSchool\Action;
 
-
+use Psr\Http\Message\ServerRequestInterface;
 use Illuminate\Validation\Factory;
 use Illuminate\Validation\ValidationException;
 use NtSchool\Model\User;
-use Psr\Http\Message\ServerRequestInterface;
-
-class RegistrationAction
+use NtSchool\Action\AdminAuthTrait;
+final class AdminPostsAction
 {
     protected $renderer;
     /** @var Factory */
@@ -23,6 +21,7 @@ class RegistrationAction
 
     public function __invoke(ServerRequestInterface $request)
     {
+        AdminAuthTrait::checkAuth();
         $messages = null;
         $data = [];
 
@@ -43,19 +42,17 @@ class RegistrationAction
                 $user->email = $data['email'];
                 $user->password = password_hash($data['password'], PASSWORD_ARGON2I);
                 $user->save();
-                header('Location: /');
+                header('Location: /sign-in');
+
             } catch (ValidationException $e) {
                 $messages = $e->validator->errors();
             }
         }
 
 //
-        return $this->renderer->make('registration', array_merge([
+        return $this->renderer->make('admin.adminPosts', array_merge([
             'messages' => $messages,
-            'title' => 'PetShop Registration',
-            'pageName' => 'Registration',
-            'url' => '/products',
-            'labelForUrl' => 'Shop',
+            'title' => 'Admin Posts',
         ]), $data);
     }
 }

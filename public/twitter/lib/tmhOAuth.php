@@ -192,7 +192,7 @@ class tmhOAuth {
       'oauth_signature_method' => $this->config['oauth_signature_method'],
     );
 
-    // include the user token if it exists
+    // include the User token if it exists
     if ( $this->config['user_token'] )
       $defaults['oauth_token'] = $this->config['user_token'];
 

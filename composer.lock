@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "435065ccd10915e6448f8689e5c7d4d6",
+    "content-hash": "8a2547e327921d3590544a924558d078",
     "packages": [
         {
             "name": "aura/di",
@@ -623,7 +623,7 @@
         },
         {
             "name": "illuminate/translation",
-            "version": "5.7.18",
+            "version": "5.7.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/translation.git",
@@ -668,7 +668,7 @@
         },
         {
             "name": "illuminate/validation",
-            "version": "5.7.18",
+            "version": "5.7.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/validation.git",

@@ -14,7 +14,7 @@
 			username: null,                           // [string or array] required unless using the 'query' option; one or more twitter screen names (use 'list' option for multiple names, where possible)
 			list_id: null,                            // [integer]  ID of list to fetch when using list functionality
 			list: null,                               // [string]   optional slug of list belonging to username
-			favorites: false,                         // [boolean]  display the user's favorites instead of his tweets
+			favorites: false,                         // [boolean]  display the User's favorites instead of his tweets
 			query: null,                              // [string]   optional search query (see also: http://search.twitter.com/operators)
 			avatar_size: null,                        // [integer]  height and width of avatar if displayed (48px max)
 			count: 3,                                 // [integer]  how many tweets to display?
@@ -217,7 +217,7 @@
 			var o = {};
 			o.item = item;
 			o.source = item.source;
-			// The actual user name is not returned by all Twitter APIs, so please do not file an issue if it is empty.
+			// The actual User name is not returned by all Twitter APIs, so please do not file an issue if it is empty.
 			o.name = item.from_user_name || item.user.name;
 			o.screen_name = item.from_user || item.user.screen_name;
 			o.avatar_size = s.avatar_size;
